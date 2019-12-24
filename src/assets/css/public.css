@@ -1,0 +1,8 @@
+.app-container {
+    height: calc(100vh - 85px);
+    padding: 10px;
+}
+
+.el-table {
+    margin: 10px auto;
+}
