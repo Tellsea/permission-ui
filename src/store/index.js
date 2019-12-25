@@ -33,7 +33,7 @@ const store = new Vuex.Store({
                     state[obj[i].type] = obj[i].param;
                 }
             } else {
-                console.error('Vuex：无法匹配对象');
+                window.console.log('Vuex：无法匹配对象');
             }
         }
     }

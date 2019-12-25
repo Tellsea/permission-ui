@@ -40,14 +40,6 @@
                         </a>
                     </template>
                 </el-table-column>
-                <el-table-column
-                        label="码云" width="100">
-                    <template slot-scope="scope">
-                        <a target="_blank" :href="scope.row.mayunCode">
-                            <el-button size="mini" type="danger">码云</el-button>
-                        </a>
-                    </template>
-                </el-table-column>
             </el-table>
         </el-card>
     </div>
@@ -60,26 +52,17 @@
             return {
                 tableData: [
                     {
-                        name: 'permission-web',
+                        name: 'permission-ui',
                         description: 'SpringBoot + Shiro + Vue 前端项目',
-                        coreTechnology: 'Vue2.6、Vue-cli3、Vue-router3、Element-ui2.13、Axios0.19、Qs6.9 等',
-                        githubCode: 'https://www.github.com/tellsea/permissin-web',
-                        mayunCode: 'https://www.gitee.com/tellsea/permissin-web'
+                        coreTechnology: 'Vue2.6、Vue-cli3、Vue-router3、Vuex、Element-ui2.13、Axios0.19、Qs6.9 等',
+                        githubCode: 'https://www.github.com/tellsea/permissin-ui'
                     },
                     {
-                        name: 'permission-admin',
+                        name: 'permission',
                         description: 'SpringBoot + Shiro + Vue 后台项目',
                         coreTechnology: 'SpringBoot2.2、TkMybatis2.1、JDBC Templete、MyBatis Plus 代码生成器、Druid1.1、Swagger2.9、Shiro1.4 等',
-                        githubCode: 'https://www.github.com/tellsea/permissin-admin',
-                        mayunCode: 'https://www.gitee.com/tellsea/permissin-admin'
+                        githubCode: 'https://www.github.com/tellsea/permissin'
                     },
-                    {
-                        name: 'permission-file-server',
-                        description: 'SpringBoot + Shiro + Vue 图片服务器',
-                        coreTechnology: 'SpringBoot2.2、IO 等',
-                        githubCode: 'https://www.github.com/tellsea/permissin-file-server',
-                        mayunCode: 'https://www.gitee.com/tellsea/permissin-file-server'
-                    }
                 ]
             }
         }
