@@ -74,7 +74,6 @@
                             {type: this.$global.consts.userInfo, param: ''}
                         ]
                     );
-                    sessionStorage.removeItem('store');
                     this.$router.push({path: '/login'});
                 });
             }

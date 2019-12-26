@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from "../store";
 
 Vue.use(VueRouter);
 
@@ -193,7 +194,7 @@ const routes = [
         path: '*',
         redirect: '/error/notFound'
     },
-]
+];
 
 const router = new VueRouter({
     mode: 'history',
@@ -201,12 +202,43 @@ const router = new VueRouter({
     routes
 });
 
-router.beforeEach((to, form, next) => {
-    /* 路由变化修改title */
+// 路由守卫
+router.beforeEach((to, from, next) => {
+    // 路由变化修改title
     if (to.meta.title) {
-        document.title = to.meta.title
+        document.title = '权限管理系统-' + to.meta.title
     }
-    next()
+    let token = store.state.token;
+    let permissions = store.state.userInfo.resourceInfoList;
+    let session = JSON.parse(sessionStorage.getItem("store"));
+    if (session) {
+        token = token ? token : session.token;
+        permissions = (permissions.length > 0) ? permissions : session.userInfo.resourceInfoList;
+    }
+    if (token === '' && to.path !== '/login') {
+        next('/login');
+    } else if (to.meta.perms) {
+        let auth = false;
+        for (let item of to.matched) {
+            auth = item.meta.perms && permissions && permissions.indexOf(item.meta.perms) > -1 && true;
+            if (!auth) {
+                break;
+            }
+        }
+        auth ? next() : next('/error/unAuth');
+    } else {
+        next();
+    }
 });
 
-export default router
+/* 路由异常错误处理，尝试解析一个异步组件时发生错误，重新渲染目标页面 */
+/*router.onError((error) => {
+    const pattern = /Loading chunk (\d)+ failed/g;
+    const isChunkLoadFailed = error.message.match(pattern);
+    const targetPath = router.history.pending.fullPath;
+    if (isChunkLoadFailed) {
+        router.replace(targetPath);
+    }
+});*/
+
+export default router;

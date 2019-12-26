@@ -25,31 +25,6 @@ Vue.prototype.$global = global;
 
 Vue.config.productionTip = false;
 
-// 路由守卫
-router.beforeEach((to, from, next) => {
-    let token = store.state.token;
-    let permissions = store.state.userInfo.resourceInfoList;
-    let session = JSON.parse(sessionStorage.getItem("store"));
-    if (session) {
-        token = token ? token : session.token;
-        permissions = (permissions.length > 0) ? permissions : session.userInfo.resourceInfoList;
-    }
-    if (token === '' && to.path !== '/login') {
-        next('/login');
-    } else if (to.meta.perms) {
-        let auth = false;
-        for (let item of to.matched) {
-            auth = item.meta.perms && permissions && permissions.indexOf(item.meta.perms) > -1 && true;
-            if (!auth) {
-                break;
-            }
-        }
-        auth ? next() : next('/error/unAuth');
-    } else {
-        next();
-    }
-});
-
 // 自定义指令
 const has = Vue.directive('has', {
     inserted: function (el, binding) {

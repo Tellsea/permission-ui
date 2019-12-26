@@ -6,10 +6,19 @@ const instance = axios.create({
     baseURL: '/api',
     timeout: 60000,
     headers: {
-        'Accept': 'application/json',
-        Authorization: store.state.token
+        'Accept': 'application/json'
     }
 });
+
+// 添加请求头
+instance.interceptors.request.use(config => {
+        config.headers.Authorization = store.state.token;
+        return config;
+    },
+    error => {
+        return Promise.reject(error);
+    }
+);
 
 /** ------------------------- 登录 ------------------------------- */
 // 登录
@@ -121,7 +130,6 @@ export const deleteSystemLog = params => {
 export const deleteSystemLogByIds = params => {
     return instance.post(`/systemLog/deleteByIds`, Qs.stringify(params))
 };
-
 
 
 /** ---------------------------------------------- 测试案例 ---------------------------------------------- */

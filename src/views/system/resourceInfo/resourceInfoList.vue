@@ -6,7 +6,9 @@
             </div>
             <el-row>
                 <el-col :md="10" :sm="24">
-                    <el-button size="mini" type="primary" icon="el-icon-plus" v-has="'resourceInfo:add'" @click="treeAppendRoot">添加根节点</el-button>
+                    <el-button size="mini" type="primary" icon="el-icon-plus" v-has="'resourceInfo:add'"
+                               @click="treeAppendRoot">添加根节点
+                    </el-button>
                     <el-tree
                             :data="treeData"
                             default-expand-all
@@ -42,7 +44,8 @@
                                 <el-input v-model="dataForm.name" placeholder="请输入"></el-input>
                             </el-form-item>
                             <el-form-item label="权限" prop="perms">
-                                <el-input v-model="dataForm.perms" placeholder="例如：add、update、delete、select、detail)"></el-input>
+                                <el-input v-model="dataForm.perms"
+                                          placeholder="例如：add、update、delete、select、detail)"></el-input>
                             </el-form-item>
                             <el-form-item label="路径" prop="url">
                                 <el-input v-model="dataForm.url" placeholder="请输入"></el-input>
@@ -56,13 +59,15 @@
                                 </el-radio-group>
                             </el-form-item>
                             <el-form-item label="图标" prop="icon">
-                                <el-input v-model="dataForm.icon" placeholder="请输入" suffix-icon="dataForm.icon"></el-input>
+                                <el-input v-model="dataForm.icon" placeholder="请输入"
+                                          suffix-icon="dataForm.icon"></el-input>
                             </el-form-item>
                             <el-form-item label="排序" prop="sort">
                                 <el-input type="number" v-model="dataForm.sort" placeholder="请输入"></el-input>
                             </el-form-item>
                             <el-form-item>
-                                <el-button size="mini" type="primary" :loading="submitLoading" v-has="'resourceInfo:update'" @click="submitForm">更新
+                                <el-button size="mini" type="primary" :loading="submitLoading"
+                                           v-has="'resourceInfo:update'" @click="submitForm">更新
                                 </el-button>
                             </el-form-item>
                         </el-form>
@@ -222,7 +227,7 @@
                 }).catch(() => {
                     this.$message.error('服务器连接错误，请联系管理员');
                 });
-            }
+            },
         },
         mounted() {
             this.loadResourceTree();
